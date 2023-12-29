@@ -1,4 +1,5 @@
 import sqlite3
+ #nomor 1 sudah
 
 # Putri Angraini Aziz E1E122074
 class DatabaseManager:
@@ -30,7 +31,7 @@ class Buku(DatabaseManager): #ini inheritance
         self.file = file
         self.sampul = sampul
 
-    def tambah_data(self):
+    def tambah_data(self):   #(2)
         query = f"INSERT INTO terbaru VALUES (null, '{self.judul}', '{self.kategori}', '{self.deskripsi}', '{self.file}', '{self.sampul}')"
         self.execute_query(query)
 
@@ -52,7 +53,7 @@ class KelolaBuku(DatabaseManager):
     def baca_buku(self, id_buku):
         query = f'select * from terbaru where id={id_buku}'
         return self.execute_query(query).fetchall()
-
+#no.2  ada yang di gantikan , metode tambah_data di class buku dan user karena meberikan aksi yang berbeda
 
 # Rahma Damayanti E1E122076
 class User(DatabaseManager):
@@ -78,3 +79,13 @@ class User(DatabaseManager):
         else:
             return "404"
 
+#3.buat class bookmark baru
+class Bookmark(DatabaseManager): #inheritance
+    def __init__(self, db_file, id_buku, username):
+        super().__init__(db_file)
+        self.__id_buku = id_buku #encap
+        self.username = username
+    def tambah_data(self): #polymor
+        query = f"INSERT INTO bookmark VALUES ('', '{self.__id_buku}', '{self.username}')"
+        self.execute_query(query)
+#(3)
